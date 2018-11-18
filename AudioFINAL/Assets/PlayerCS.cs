@@ -75,19 +75,6 @@ public class PlayerCS : MonoBehaviour {
         {
             flashlight.SetActive(false);
         }
-
-
-        /*
-        Ray myRay = Camera.main.ScreenPointToRay(Input.mousePosition);
-        //by default the max raycast distance is infinity
-        float maxRayDist = 10000f;
-        */
-
-        //Debug.DrawRay(myRay.origin, myRay.direction * maxRayDist, Color.red);
-
-        
-        //remembers where, when, distance, and angle the ray hit something
-        //RaycastHit myRayHit = new RaycastHit();
     }
         
 
