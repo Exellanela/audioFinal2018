@@ -16,7 +16,7 @@ public class PlayerCS : MonoBehaviour {
     public bool flashOn = true;
 
     float mouseSensitivity = 100f;
-    Vector2 mousePos;
+    Vector3 mousePos;
 
 
 
@@ -40,10 +40,27 @@ public class PlayerCS : MonoBehaviour {
 
 
         //ROTATION (in ani it will only be the head and arm/flashlight)
-        Vector2 direction = Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position;
-        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-        Quaternion rotation = Quaternion.AngleAxis(angle, Vector3.forward);
-        transform.rotation = Quaternion.Slerp(transform.rotation, rotation, speed * Time.deltaTime);
+        mousePos = Input.mousePosition;
+        /*
+        Vector3 targetDir = transform.position - mousePos;
+        float step = 2 * Time.deltaTime;
+        Vector3 newDir = Vector3.RotateTowards(transform.forward, targetDir, step, 0.0f);
+        transform.rotation = Quaternion.LookRotation(newDir);
+        */
+
+        Ray mouseRay = Camera.main.ScreenPointToRay(mousePos);
+        float maxRayDist = 10000f;
+        Debug.DrawRay(mouseRay.origin, mouseRay.direction * maxRayDist, Color.red); //DEBUG!!!!!!!!!!!!!!!!!!!!!!!!
+        RaycastHit mouseRayHit = new RaycastHit();
+
+        if (Physics.Raycast(mouseRay, out mouseRayHit, maxRayDist))
+        {
+            Vector3 newpoint = new Vector3(mouseRayHit.point.x, flashlight.transform.position.y, mouseRayHit.point.z);
+            //Debug.Log(newpoint);
+            flashlight.transform.LookAt(newpoint);
+        }
+
+
 
         if (Input.GetMouseButtonDown(0))
         {
