@@ -8,6 +8,9 @@ public class OnEne : MonoBehaviour {
     float distance;
     GameObject player;
     Vector3 playerPos;
+    public AudioClip demonSound01;
+    public AudioClip demonSound02;
+
 
 	// Use this for initialization
 	void Start () {
@@ -23,6 +26,17 @@ public class OnEne : MonoBehaviour {
         _moveTimer -= Time.deltaTime;
         if (_moveTimer <= 0)
         {
+            //play random sound
+            float randNum = Random.Range(0, 2);
+            if (randNum < 1)
+            {
+                Sound.me.PlaySound(demonSound01, 5);
+            }
+            else if (randNum < 2)
+            {
+                Sound.me.PlaySound(demonSound02, 5);
+            }
+
             //move towards player
             Vector3.MoveTowards(transform.position, playerPos, 5);
             _moveTimer = Random.Range(2f, 8f);

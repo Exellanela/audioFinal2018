@@ -18,6 +18,11 @@ public class PlayerCS : MonoBehaviour {
     float mouseSensitivity = 100f;
     Vector3 mousePos;
 
+    public AudioClip grassWalk01;
+    public AudioClip grassWalk02;
+    public AudioClip click;
+    float stepTimer = 0.2f;
+
 
 
     public void Start()
@@ -36,6 +41,24 @@ public class PlayerCS : MonoBehaviour {
         if (inputVector.magnitude > 1)
         {
             inputVector = Vector3.Normalize(inputVector);
+        }
+
+        if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.W))
+        {
+            stepTimer -= Time.deltaTime;
+            if (stepTimer <= 0)
+            {
+                float randNum = Random.Range(0, 2);
+                if (randNum < 1)
+                {
+                    Sound.me.PlaySound(grassWalk01, 2); //WILL CHANGE PITCH LATER IM SORRY
+                }
+                else if (randNum < 2)
+                {
+                    Sound.me.PlaySound(grassWalk02, 2);
+                }
+                stepTimer = 0.2f;
+            }
         }
 
 
@@ -65,6 +88,7 @@ public class PlayerCS : MonoBehaviour {
         if (Input.GetMouseButtonDown(0))
         {
             //Debug.Log("YES");
+            Sound.me.PlaySound(click, 5);
             flashOn = !flashOn;
         }
 
