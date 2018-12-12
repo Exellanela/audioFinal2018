@@ -53,11 +53,12 @@ public class Ene2 : MonoBehaviour {
         if (destroy)
         {
             deathTime += Time.deltaTime;
-            if (deathTime >= 2f)
+            if (deathTime >= 1.5f)
             {
                 Destroy(gameObject);
             }
             once = false;
+            meshOn = false;
             beingHit = false;
         }
 
@@ -150,10 +151,10 @@ public class Ene2 : MonoBehaviour {
             
             screamTime += Time.deltaTime;
             
-            if (screamTime >= audSource.clip.length - 1.7f)
+            if (screamTime >= audSource.clip.length - 1.4f)
             {
                 destroy = true;
-                //meshOn = false;
+                meshOn = false;
                 beingHit = false;
             }
 

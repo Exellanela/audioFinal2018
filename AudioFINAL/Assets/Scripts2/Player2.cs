@@ -21,7 +21,7 @@ public class Player2 : MonoBehaviour
 
     Vector3 mousePos;
 
-    float stepTimer = 0.2f;
+    float stepTimer = 0.3f;
     float audtimer;
 
 
@@ -84,7 +84,7 @@ public class Player2 : MonoBehaviour
                     Sound.me.PlaySound(SoundCS.me.ftspExtras[randInt2], 0.2f, randPitch);
                 }
 
-                stepTimer = 0.2f;
+                stepTimer = 0.3f;
             }
         }
 
@@ -163,10 +163,12 @@ public class Player2 : MonoBehaviour
             {
                 volume += 0.02f;
             }
+            /*
             else if (distanceFromClosest <= 15f)
             {
                 volume += 0.002f;
             }
+            */
             else
             {
                 volume -= 0.05f;
