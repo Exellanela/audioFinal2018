@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Player2 : MonoBehaviour {
+public class Player2 : MonoBehaviour
+{
 
     UIManager UIScript;
 
@@ -14,19 +15,23 @@ public class Player2 : MonoBehaviour {
     public float speed;
 
     public GameObject flashlight;
-    AudioSource audSource;
+    AudioSource hbSource; //THIS IS THE HEARTBEAT
+    public float volume = 0f;
     public bool flashOn = true;
-    
+
     Vector3 mousePos;
-    
+
     float stepTimer = 0.2f;
     float audtimer;
+
 
     IEnumerator Fadeout;
     /*
     public AudioSource heartbeatAudiosource;
     bool heartActive;
     */
+
+    float distanceFromClosest;
 
 
 
@@ -35,14 +40,18 @@ public class Player2 : MonoBehaviour {
         UIScript = FindObjectOfType<UIManager>();
 
         _rb = GetComponent<Rigidbody>();
-        audSource = GetComponentInChildren<AudioSource>();
+        hbSource = GetComponent<AudioSource>();
         audtimer = Random.Range(5f, 20f);
 
+        hbSource.clip = SoundCS.me.heartbeat;
+        hbSource.volume = 0;
         //heartbeatAudiosource.clip = SoundCS.me.heartbeat;
     }
 
     void Update()
     {
+        hbSource.volume = volume;
+
         playerPos = transform.position;
         transform.rotation = Quaternion.identity;
         _rb.angularVelocity = Vector3.zero;
@@ -109,7 +118,7 @@ public class Player2 : MonoBehaviour {
         {
             //SoundCS.me.SpawnSound(SoundCS.me.click, playerPos, 1f, 1);
             float randPitch = Random.Range(0.8f, 1.2f);
-            Sound.me.PlaySound(SoundCS.me.click, 0.6f, randPitch);
+            Sound.me.PlaySound(SoundCS.me.click, 0.2f, randPitch);
             flashOn = !flashOn;
         }
 
@@ -143,6 +152,27 @@ public class Player2 : MonoBehaviour {
 
         //SOUNDS I GUESS
         
+        if (FindClosestEnemy() != null)
+        {
+            distanceFromClosest = Vector3.Distance(playerPos, FindClosestEnemy().transform.position);
+            if (distanceFromClosest <= 5f)
+            {
+                volume += 0.08f;
+            }
+            else if (distanceFromClosest <= 9f)
+            {
+                volume += 0.02f;
+            }
+            else if (distanceFromClosest <= 15f)
+            {
+                volume += 0.002f;
+            }
+            else
+            {
+                volume -= 0.05f;
+            }
+        } 
+        
     }
 
 
@@ -168,5 +198,30 @@ public class Player2 : MonoBehaviour {
 
         audioSource.Stop();
         audioSource.volume = startVolume;
+    }
+
+    public void SetVol(float vol)
+    {
+        volume = vol;
+    }
+
+    public GameObject FindClosestEnemy()
+    {
+        GameObject[] gos;
+        gos = GameObject.FindGameObjectsWithTag("Enemy");
+        GameObject closest = null;
+        float distance = Mathf.Infinity;
+        Vector3 position = transform.position;
+        foreach (GameObject go in gos)
+        {
+            Vector3 diff = go.transform.position - position;
+            float curDistance = diff.sqrMagnitude;
+            if (curDistance < distance)
+            {
+                closest = go;
+                distance = curDistance;
+            }
+        }
+        return closest;
     }
 }

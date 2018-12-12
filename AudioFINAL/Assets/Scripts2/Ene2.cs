@@ -5,6 +5,7 @@ using UnityEngine;
 public class Ene2 : MonoBehaviour {
 
     UIManager UIScript;
+    Player2 PlayerScript;
 
     private float _timer;
     float distance;
@@ -25,6 +26,8 @@ public class Ene2 : MonoBehaviour {
     float volume;
 
     bool once = true;
+    float screamTime = 0f;
+    bool destroy;
 
 
     // Use this for initialization
@@ -32,6 +35,7 @@ public class Ene2 : MonoBehaviour {
     {
         //Debug.Log("HI");
         UIScript = FindObjectOfType<UIManager>();
+        PlayerScript = FindObjectOfType<Player2>();
         player = GameObject.FindGameObjectWithTag("Player");
 
         meshRenderer = GetComponent<MeshRenderer>();
@@ -42,9 +46,21 @@ public class Ene2 : MonoBehaviour {
         Fadeout = FadeOut(audSource, 0.2f);
     }
 
+    float deathTime = 0f;
     // Update is called once per frame
     void Update()
     {
+        if (destroy)
+        {
+            deathTime += Time.deltaTime;
+            if (deathTime >= 2f)
+            {
+                Destroy(gameObject);
+            }
+            once = false;
+            beingHit = false;
+        }
+
         if (meshOn)
         { meshRenderer.enabled = true; }
         else { meshRenderer.enabled = false; }
@@ -55,7 +71,7 @@ public class Ene2 : MonoBehaviour {
 
         if (distance <= 3f)
         {
-            Sound.me.PlaySound(SoundCS.me.death, 0.4f);
+            Sound.me.PlaySound(SoundCS.me.death, 0.1f);
             Destroy(gameObject);
             UIScript.gameOver = true;
         }
@@ -71,11 +87,19 @@ public class Ene2 : MonoBehaviour {
         {
             //deep breathing (but not the players?)
             //Sound.me.PlaySound(SoundCS.me.heartbeat, 0.5f);
+            //PlayerScript.SetVol(0.7f);
             UIScript.DecreaseSanity(0.08f);
         } else if (distance <= 10f)
         {
+            //PlayerScript.SetVol(0.3f);
             UIScript.DecreaseSanity(0.02f);
         }
+        /*
+        else
+        {
+            PlayerScript.SetVol(0f);
+        }
+        */
 
         //rotate
         Vector3 targetDir = transform.position - playerPos;
@@ -101,31 +125,61 @@ public class Ene2 : MonoBehaviour {
             }
         }
 
+        //only happens once
         if (once && beingHit)
         {
             //Debug.Log("play");
-            audSource.volume = volume;
+            audSource.pitch = 1f;
+            float randPitch = Random.Range(0.8f, 1.3f);
+            audSource.volume = 1f;
+            audSource.pitch = randPitch;
             audSource.Play();
             once = false;
         }
+
 
         if (beingHit)
         {
             //CHECK PLZ
             //PlayScreech().GetComponent<AudioSource>().Play();
-            DecreaseVol(audSource, 10f);
+            //DecreaseVol(audSource, 10f);
             able2move = false;
             meshOn = true;
+
+            //if sound plays out
+            
+            screamTime += Time.deltaTime;
+            
+            if (screamTime >= audSource.clip.length - 1.7f)
+            {
+                destroy = true;
+                //meshOn = false;
+                beingHit = false;
+            }
+
         } else
         {
             //Fadeout = FadeOut(PlayScreech().GetComponent<AudioSource>(), 1f);
             //Debug.Log("NO");
             //StartCoroutine(Fadeout);
-
+            screamTime = 0f;
+            DecreaseVol(audSource, 2f);
             able2move = true;
             meshOn = false;
         }
         beingHit = false;
+
+        if (audSource.volume <= 0)
+        {
+            audSource.Stop();
+        }
+
+
+        //IF GAME OVER OR VIC
+        if (UIScript.gameOver || UIScript.victory)
+        {
+            Destroy(gameObject);
+        }
     }
 
     public void DecreaseVol(AudioSource source, float dec)
@@ -133,16 +187,6 @@ public class Ene2 : MonoBehaviour {
         //float startVol = source.volume;
         
         source.volume -= dec * Time.deltaTime;
-        if (source.volume <= 0)
-        {
-            source.Stop();
-        }
-    }
-
-    public void DecreaseLife()
-    {
-        hp--;
-        //Debug.Log(hp);
     }
 
     private void OnTriggerStay(Collider other)
@@ -179,11 +223,17 @@ public class Ene2 : MonoBehaviour {
 
     public void PlayRandomGrowl()
     {
+        /*
         int randInt = Mathf.RoundToInt(Random.Range(0f, SoundCS.me.repeatSounds.Length - 1));
         float randPitch = Random.Range(0.7f, 1.2f);
         //SoundCS.me.PlaySound(audSource, SoundCS.me.footsteps[randInt], randPitch); //cutting off
         SoundCS.me.SpawnSound(SoundCS.me.repeatSounds[randInt], transform.position, 0.6f, 0, randPitch);
+        */
 
+        int randInt = Mathf.RoundToInt(Random.Range(0f, SoundCS.me.repeatSounds.Length - 1));
+        float randPitch = Random.Range(0.7f, 1.2f);
+        //SoundCS.me.PlaySound(audSource, SoundCS.me.footsteps[randInt], randPitch); //cutting off
+        SoundCS.me.SpawnSound(SoundCS.me.longThing, transform.position, 0.6f, 0, randPitch);
     }
     
 

@@ -13,9 +13,11 @@ public class SoundCS : MonoBehaviour {
     //public AudioClip[] ftspSlower;
     public AudioClip[] footsteps;
     public AudioClip[] ftspExtras;
+    public AudioClip[] grunts;
+    public AudioClip[] gasps;
     public AudioClip click;
     public AudioClip heartbeat;
-    public AudioClip deepBreathing;
+    //public AudioClip deepBreathing;
 
 
     public bool followDemon;
@@ -23,11 +25,13 @@ public class SoundCS : MonoBehaviour {
     public AudioClip[] repeatSounds;
     public AudioClip dying;
     public AudioClip death;
+    public AudioClip longThing;
 
 
     [Header("Ambience")]
     public AudioClip[] extras;
     public AudioClip[] trees;
+    public AudioClip alert;
 
 
     private void Awake()

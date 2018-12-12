@@ -18,7 +18,7 @@ public class Spawn2 : MonoBehaviour {
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player");
-        _spawnTimer = Random.Range(7f, 20f);
+        _spawnTimer = Random.Range(3f, 10f);
 
         HouseSpawn();
 
@@ -51,20 +51,28 @@ public class Spawn2 : MonoBehaviour {
 
     void Update()
     {
-        playerPos = player.transform.position;
-
-        //DEMON SPAWN
         _spawnTimer -= Time.deltaTime;
+
         if (_spawnTimer <= 0)
         {
-            int randInt = Mathf.RoundToInt(Random.Range(0f, SoundCS.me.repeatSounds.Length-1));
+            int randInt = Mathf.RoundToInt(Random.Range(0f, SoundCS.me.repeatSounds.Length - 1));
+            float randPitch = Random.Range(0.8f, 1.3f);
             Vector3 position = Vector3.zero;
-            position.x = Random.Range(playerPos.x - 15, playerPos.x + 15);
-            position.z = Random.Range(playerPos.z - 8, playerPos.z + 8);
+            position.x = Random.Range(playerPos.x - 30, playerPos.x + 30);
+            position.z = Random.Range(playerPos.z - 15, playerPos.z + 15);
             Instantiate(demonPrefab, position, Quaternion.identity);
-            SoundCS.me.SpawnSound(SoundCS.me.repeatSounds[randInt], position, 1f);
+            SoundCS.me.SpawnSound(SoundCS.me.repeatSounds[randInt], position, 1f, 0, randPitch);
+            
 
-            //Debug.Log(position.x);
+            //check distance from player
+            float distance = Vector3.Distance(position, playerPos);
+
+            if (distance <= 8f)
+            {
+                int randInt2 = Mathf.RoundToInt(Random.Range(0f, SoundCS.me.gasps.Length - 1));
+                float randPitch2 = Random.Range(1.1f, 1.4f);
+                Sound.me.PlaySound(SoundCS.me.gasps[randInt2], 0.5f, randPitch2);
+            }
 
             _spawnTimer = Random.Range(7f, 30f);
         }

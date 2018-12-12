@@ -12,12 +12,15 @@ public class UIManager : MonoBehaviour {
     public Slider BatterySlider;
 
     public bool gameOver;
-    public static bool victory;
+    public bool victory;
 
     public Canvas goCanvas;
     public Canvas vicCanvas;
 
-    float timer = 5f;
+    float timer = 1.5f;
+
+
+    AudioSource ambienceSource;
 
 
     void Start()
@@ -28,6 +31,8 @@ public class UIManager : MonoBehaviour {
         vicCanvas.enabled = false;
         SanitySlider.value = 100;
         BatterySlider.value = 100;
+
+        ambienceSource = GetComponent<AudioSource>();
     }
 
     void Update()
@@ -50,6 +55,7 @@ public class UIManager : MonoBehaviour {
         }
         if (gameOver)
         {
+            ambienceSource.Stop();
             goCanvas.enabled = true;
             Time.timeScale = 0f;
         }
@@ -58,7 +64,7 @@ public class UIManager : MonoBehaviour {
         {
             BatterySlider.value -= 0.03f;
         }
-        if (BatterySlider.value <= 0)
+        if (BatterySlider.value <= 0f)
         {
             playerScript.flashOn = false;
         }
@@ -66,7 +72,15 @@ public class UIManager : MonoBehaviour {
 
 
         //SOUND SHIT plz help me
-
+        if (BatterySlider.value <= 20f)
+        {
+            timer -= Time.deltaTime;
+            if (timer <= 0f)
+            {
+                Sound.me.PlaySound(SoundCS.me.alert, 0.6f);
+                timer = 1.5f;
+            }
+        }
     }
 
     public void DecreaseSanity(float amt)
