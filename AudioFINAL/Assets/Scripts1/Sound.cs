@@ -29,7 +29,7 @@ public class Sound : MonoBehaviour {
 		audSources [sNum].Play ();
 	}
 
-	public int GetSourceNum() {
+    public int GetSourceNum() {
 		for (int i = 0; i < audSources.Length; i++) {
 			if (!audSources [i].isPlaying) {
 				return i;

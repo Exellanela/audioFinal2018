@@ -99,7 +99,6 @@ public class PlayerCS : MonoBehaviour {
         {
             //Debug.Log("YES");
             Sound.me.PlaySound(click, 1);
-            //SoundManager.me.PlaySound(click, 1);
             flashOn = !flashOn;
         }
 

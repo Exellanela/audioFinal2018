@@ -193,8 +193,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 0.5
-  noise1: {fileID: 8300000, guid: d0fd9a53156c77b449b89e0423a798d7, type: 3}
-  noise2: {fileID: 8300000, guid: 151b440eec89e9747a8a265fe9f99bf5, type: 3}
+  noise1: {fileID: 8300000, guid: b09fdfc8609e7454b8941bdaa97a9c6a, type: 3}
+  noise2: {fileID: 8300000, guid: 00db986a3e67b5f47b17b547f12f55e4, type: 3}
+  deathClip: {fileID: 8300000, guid: d0ff5c818c4d8564c8537e4d409c2ef8, type: 3}
+  screech: {fileID: 8300000, guid: 4aae0e2c0befbaa41be9602b4f49365d, type: 3}
   meshOn: 0
 --- !u!136 &136349784218607106
 CapsuleCollider:

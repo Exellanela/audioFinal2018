@@ -5,12 +5,13 @@ using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour {
 
-    PlayerCS playerScript;
-    
+    //PlayerCS playerScript;
+    Player2 playerScript;
+
     public Slider SanitySlider;
     public Slider BatterySlider;
 
-    public static bool gameOver;
+    public bool gameOver;
     public static bool victory;
 
     public Canvas goCanvas;
@@ -18,9 +19,11 @@ public class UIManager : MonoBehaviour {
 
     float timer = 5f;
 
+
     void Start()
     {
-        playerScript = FindObjectOfType<PlayerCS>();
+        //playerScript = FindObjectOfType<PlayerCS>();
+        playerScript = FindObjectOfType<Player2>();
         goCanvas.enabled = false;
         vicCanvas.enabled = false;
         SanitySlider.value = 100;
@@ -33,6 +36,12 @@ public class UIManager : MonoBehaviour {
         {
             gameOver = true;
         }
+        /*
+        else if (SanitySlider.value <= 20)
+        {
+            Sound.me.PlaySound(SoundCS.me.heartbeat, 0.3f);
+        }
+        */
 
         if (victory)
         {
@@ -47,7 +56,7 @@ public class UIManager : MonoBehaviour {
 
         if (playerScript.flashOn)
         {
-            BatterySlider.value -= 0.01f;
+            BatterySlider.value -= 0.03f;
         }
         if (BatterySlider.value <= 0)
         {
