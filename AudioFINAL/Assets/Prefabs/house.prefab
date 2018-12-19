@@ -217,6 +217,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4610275623066236}
   - component: {fileID: 65893045027732984}
+  - component: {fileID: 114032706197158164}
   m_Layer: 0
   m_Name: GameObject
   m_TagString: Untagged
@@ -353,7 +354,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4934741669083782}
   - component: {fileID: 82228008009077568}
-  - component: {fileID: 114424176088027950}
   m_Layer: 0
   m_Name: house
   m_TagString: Untagged
@@ -668,7 +668,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1799912131600336}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.9968648, y: -0.82, z: 5.19}
+  m_LocalPosition: {x: 1.7155204, y: -1.3999939, z: 30.959194}
   m_LocalScale: {x: 0.3724859, y: 0.3724859, z: 0.3724859}
   m_Children:
   - {fileID: 4140154979103560}
@@ -813,7 +813,7 @@ AudioSource:
   Spatialize: 0
   SpatializePostEffects: 0
   Priority: 128
-  DopplerLevel: 1
+  DopplerLevel: 0
   MinDistance: 1
   MaxDistance: 100
   Pan2D: 0
@@ -834,8 +834,8 @@ AudioSource:
       inWeight: 0.33333334
       outWeight: 0.4267846
     - serializedVersion: 3
-      time: 0.06912275
-      value: 0.36850625
+      time: 0.087086156
+      value: 0.35524637
       inSlope: -2.4535985
       outSlope: -2.4535985
       tangentMode: 0
@@ -843,8 +843,8 @@ AudioSource:
       inWeight: 0.33333334
       outWeight: 0.5399004
     - serializedVersion: 3
-      time: 0.22391814
-      value: 0.12558536
+      time: 0.2897827
+      value: 0.099080846
       inSlope: -0.40499488
       outSlope: -0.40499488
       tangentMode: 0
@@ -853,7 +853,7 @@ AudioSource:
       outWeight: 0.21939673
     - serializedVersion: 3
       time: 1
-      value: 0.030914307
+      value: 0.026489258
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -908,12 +908,12 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &114424176088027950
+--- !u!114 &114032706197158164
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1799912131600336}
+  m_GameObject: {fileID: 1448429073643952}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: bdbe997efb0ee894c8b0e95b92f95ac5, type: 3}

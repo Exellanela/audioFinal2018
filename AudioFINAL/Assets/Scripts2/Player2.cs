@@ -157,22 +157,30 @@ public class Player2 : MonoBehaviour
             distanceFromClosest = Vector3.Distance(playerPos, FindClosestEnemy().transform.position);
             if (distanceFromClosest <= 5f)
             {
-                volume += 0.08f;
+                //volume += 0.08f;
+                volume = 1;
             }
             else if (distanceFromClosest <= 9f)
             {
-                volume += 0.02f;
+                //volume += 0.02f;
+                volume = 0.6f;
             }
-            /*
             else if (distanceFromClosest <= 15f)
             {
-                volume += 0.002f;
+                //volume += 0.002f;
+                volume = 0.3f;
             }
-            */
+            else
+            {
+                volume = 0f;
+            }
+            
+            /*
             else
             {
                 volume -= 0.05f;
             }
+            */
         } 
         
     }

@@ -127,6 +127,8 @@ public class Ene2 : MonoBehaviour {
         }
 
         //only happens once
+        //...whenever the light is on it
+        //or sth
         if (once && beingHit)
         {
             //Debug.Log("play");
@@ -224,17 +226,11 @@ public class Ene2 : MonoBehaviour {
 
     public void PlayRandomGrowl()
     {
-        /*
+        
         int randInt = Mathf.RoundToInt(Random.Range(0f, SoundCS.me.repeatSounds.Length - 1));
-        float randPitch = Random.Range(0.7f, 1.2f);
-        //SoundCS.me.PlaySound(audSource, SoundCS.me.footsteps[randInt], randPitch); //cutting off
+        float randPitch = Random.Range(0.9f, 1.3f);
+        //SoundCS.me.PlaySound(audSource, SoundCS.me.footsteps[randInt], randPitch); //cutting off... this was for the player idk why this is here
         SoundCS.me.SpawnSound(SoundCS.me.repeatSounds[randInt], transform.position, 0.6f, 0, randPitch);
-        */
-
-        int randInt = Mathf.RoundToInt(Random.Range(0f, SoundCS.me.repeatSounds.Length - 1));
-        float randPitch = Random.Range(0.7f, 1.2f);
-        //SoundCS.me.PlaySound(audSource, SoundCS.me.footsteps[randInt], randPitch); //cutting off
-        SoundCS.me.SpawnSound(SoundCS.me.longThing, transform.position, 0.6f, 0, randPitch);
     }
     
 

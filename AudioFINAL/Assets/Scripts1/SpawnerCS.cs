@@ -18,7 +18,7 @@ public class SpawnerCS : MonoBehaviour {
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player");
-        _spawnTimer = Random.Range(7f, 30f);
+        _spawnTimer = Random.Range(4f, 10f);
 
         HouseSpawn();
 
@@ -64,7 +64,7 @@ public class SpawnerCS : MonoBehaviour {
 
             //Debug.Log(position.x);
 
-            _spawnTimer = Random.Range(7f, 30f);
+            _spawnTimer = Random.Range(5f, 15f);
         }
     }
 }

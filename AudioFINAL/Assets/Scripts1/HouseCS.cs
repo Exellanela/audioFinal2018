@@ -24,8 +24,10 @@ public class HouseCS : MonoBehaviour {
 
     private void OnCollisionEnter(Collision c)
     {
+        Debug.Log("HIT");
         if (c.gameObject.tag == "Player")
         {
+            Debug.Log("okay");
             UiScript.victory = true;
         }
     }
