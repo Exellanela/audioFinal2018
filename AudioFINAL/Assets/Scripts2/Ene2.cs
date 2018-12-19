@@ -89,11 +89,11 @@ public class Ene2 : MonoBehaviour {
             //deep breathing (but not the players?)
             //Sound.me.PlaySound(SoundCS.me.heartbeat, 0.5f);
             //PlayerScript.SetVol(0.7f);
-            UIScript.DecreaseSanity(0.08f);
+            UIScript.DecreaseSanity(0.3f);
         } else if (distance <= 10f)
         {
             //PlayerScript.SetVol(0.3f);
-            UIScript.DecreaseSanity(0.02f);
+            UIScript.DecreaseSanity(0.1f);
         }
         /*
         else

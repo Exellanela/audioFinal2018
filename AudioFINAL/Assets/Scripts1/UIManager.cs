@@ -2,11 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class UIManager : MonoBehaviour {
 
     //PlayerCS playerScript;
     Player2 playerScript;
+
+    public string scene;
 
     public Slider SanitySlider;
     public Slider BatterySlider;
@@ -21,6 +24,9 @@ public class UIManager : MonoBehaviour {
 
 
     AudioSource ambienceSource;
+
+    float setBattery;
+    bool once = true;
 
 
     void Start()
@@ -39,6 +45,7 @@ public class UIManager : MonoBehaviour {
     {
         if (SanitySlider.value <= 0)
         {
+            Sound.me.PlaySound(SoundCS.me.death, 0.1f);
             gameOver = true;
         }
         /*
@@ -62,11 +69,28 @@ public class UIManager : MonoBehaviour {
 
         if (playerScript.flashOn)
         {
-            BatterySlider.value -= 0.03f;
+            BatterySlider.value -= 0.05f;
         }
         if (BatterySlider.value <= 0f)
         {
+            Sound.me.PlaySound(SoundCS.me.click, 0.2f);
             playerScript.flashOn = false;
+        }
+
+        if (victory || gameOver)
+        {
+            if (Input.GetKey(KeyCode.R))
+            {
+                SceneManager.LoadScene(scene);
+            }
+
+            if (once)
+            {
+                setBattery = BatterySlider.value;
+                once = false;
+            }
+
+            BatterySlider.value = setBattery;
         }
 
 

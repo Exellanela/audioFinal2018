@@ -218,6 +218,7 @@ GameObject:
   - component: {fileID: 4610275623066236}
   - component: {fileID: 65893045027732984}
   - component: {fileID: 114032706197158164}
+  - component: {fileID: 82258747694219706}
   m_Layer: 0
   m_Name: GameObject
   m_TagString: Untagged
@@ -353,7 +354,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4934741669083782}
-  - component: {fileID: 82228008009077568}
   m_Layer: 0
   m_Name: house
   m_TagString: Untagged
@@ -795,12 +795,12 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1.0456686, y: 1, z: 1}
   m_Center: {x: -0.034318585, y: 0, z: 0}
---- !u!82 &82228008009077568
+--- !u!82 &82258747694219706
 AudioSource:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1799912131600336}
+  m_GameObject: {fileID: 1448429073643952}
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
